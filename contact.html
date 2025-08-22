@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact · BrandName</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/styles.css" />
+  <meta name="description" content="BrandName simple multi-page site" />
+</head>
+<body>
+  <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">Skip to content</a>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Go to home">
+        <img class="brand-logo" src="assets/logo.svg" alt="BrandName logo" width="36" height="36" />
+        <span class="brand-name">BrandName</span>
+      </a>
+      <nav class="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="about.html" >About</a></li>
+          <li><a href="services.html" >Services</a></li>
+          <li><a href="contact.html" aria-current="page" class="active">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" role="main">
+    <div class="container">
+
+      <h1>Contact Us</h1>
+      <p class="lead">We’d love to hear from you.</p>
+      <form action="#" method="post" onsubmit="alert('This is a static demo. Replace with your backend or use a form service.'); return false;">
+        <div>
+          <label for="name">Name</label>
+          <input id="name" name="name" type="text" placeholder="Your name" required />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required />
+        </div>
+        <div>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="How can we help?" required></textarea>
+        </div>
+        <div>
+          <button class="button" type="submit">Send</button>
+        </div>
+      </form>
+
+    </div>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> BrandName. All rights reserved.</div>
+      <div><a href="mailto:hello@example.com" class="muted" style="color:inherit;text-decoration:none;">hello@example.com</a></div>
+    </div>
+  </footer>
+  <script>
+    // set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

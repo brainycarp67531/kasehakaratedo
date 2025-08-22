@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Services · BrandName</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/styles.css" />
+  <meta name="description" content="BrandName simple multi-page site" />
+</head>
+<body>
+  <a class="skip-link" href="#main" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">Skip to content</a>
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <a class="brand" href="index.html" aria-label="Go to home">
+        <img class="brand-logo" src="assets/logo.svg" alt="BrandName logo" width="36" height="36" />
+        <span class="brand-name">BrandName</span>
+      </a>
+      <nav class="primary-nav" aria-label="Primary">
+        <ul>
+          <li><a href="about.html" >About</a></li>
+          <li><a href="services.html" aria-current="page" class="active">Services</a></li>
+          <li><a href="contact.html" >Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" role="main">
+    <div class="container">
+
+      <h1>Our Services</h1>
+      <p class="lead">What we do best.</p>
+      <div class="cards" style="margin-top:1rem;">
+        <article class="card">
+          <h3>Consulting</h3>
+          <p>Expert guidance to help you architect the right solution.</p>
+        </article>
+        <article class="card">
+          <h3>Implementation</h3>
+          <p>Hands-on delivery using modern, proven practices.</p>
+        </article>
+        <article class="card">
+          <h3>Support</h3>
+          <p>Long-term care and optimization for your platform.</p>
+        </article>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> BrandName. All rights reserved.</div>
+      <div><a href="mailto:hello@example.com" class="muted" style="color:inherit;text-decoration:none;">hello@example.com</a></div>
+    </div>
+  </footer>
+  <script>
+    // set current year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
