@@ -1,6 +1,7 @@
 
 (function(){
   const routes = {
+    home: 'pages/home.html',
     about: 'pages/about.html',
     services: 'pages/services.html',
     contact: 'pages/contact.html'
@@ -18,7 +19,7 @@
   }
 
   async function loadRoute(route){
-    if(!routes[route]){ route = 'about'; }
+    if(!routes[route]){ route = 'home'; }
     setActive(route);
     try{
       const res = await fetch(routes[route], { cache: 'no-store' });
@@ -34,7 +35,7 @@
   }
 
   function handleHash(){
-    const route = (location.hash || '#about').replace('#','');
+    const route = (location.hash || '#home').replace('#','');
     loadRoute(route);
   }
 
