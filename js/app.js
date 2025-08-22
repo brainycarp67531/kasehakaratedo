@@ -3,7 +3,7 @@
   const routes = {
     home: 'pages/home.html',
     about: 'pages/about.html',
-    services: 'pages/services.html',
+    schedule: 'pages/schedule.html',
     contact: 'pages/contact.html'
   };
 
