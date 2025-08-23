@@ -49,8 +49,9 @@ footer.site-footer{ background:var(--surface); border-top:1px solid #e6e8ee; mar
 @media (max-width: 900px){ .card{ grid-column:span 6 } }
 @media (max-width: 600px){ .header-inner{ flex-wrap:wrap } nav.primary-nav ul{ flex-wrap:wrap } .card{ grid-column:span 12 } }
 
+
 /* ===== Welcome page ===== */
-.welcome{
+/* .welcome{
   min-height:100dvh; display:grid; place-items:center; background:linear-gradient(180deg,#eef3ff, #ffffff 40%);
 }
 .welcome .panel{
@@ -58,4 +59,4 @@ footer.site-footer{ background:var(--surface); border-top:1px solid #e6e8ee; mar
 }
 .welcome .logo{ width:64px; height:64px; }
 .welcome h1{ margin:.5rem 0 0; color:var(--brand-ink) }
-.welcome p{ color:var(--muted); max-width:56ch; margin-inline:auto }
+.welcome p{ color:var(--muted); max-width:56ch; margin-inline:auto } */
