@@ -28,7 +28,7 @@ header.site-header{ background:var(--surface); border-bottom:1px solid #e6e8ee; 
 .brand{ display:flex; align-items:center; gap:.75rem; text-decoration:none; }
 .brand-logo{ width:36px;height:36px; display:inline-block; }
 .brand-name{ font-weight:700; letter-spacing:.2px; color:var(--brand-ink); text-decoration:none; }
-nav.primary-n.skip-link {
+.skip-link {
   position: absolute;
   left: -9999px;
   top: auto;
@@ -43,16 +43,7 @@ nav.primary-n.skip-link {
   height: auto;
   overflow: visible;
 }
-document.addEventListener('DOMContentLoaded', function() {
-  // Your existing app.js code for routing...
-
-  // Set copyright year
-  const yearSpan = document.getElementById('year');
-  if (yearSpan) {
-    yearSpan.textContent = new Date().getFullYear();
-  }
-});
-av ul{ list-style:none; margin:0; padding:0; display:flex; gap:.75rem; align-items:center; }
+nav ul{ list-style:none; margin:0; padding:0; display:flex; gap:.75rem; align-items:center; }
 nav.primary-nav a{ display:inline-block; padding:.5rem .75rem; border-radius:.5rem; color:var(--ink); text-decoration:none; }
 nav.primary-nav a:hover{ background:#eef3ff; color:#0b3d91 }
 nav.primary-nav a[aria-current="page"], nav.primary-nav a.active{ background:var(--brand); color:#fff; }

@@ -45,5 +45,11 @@
   }));
 
   window.addEventListener('hashchange', handleHash);
-  document.addEventListener('DOMContentLoaded', handleHash);
+  document.addEventListener('DOMContentLoaded', () => {
+    handleHash();
+    const yearSpan = document.getElementById('year');
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    }
+  });
 })();
