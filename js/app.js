@@ -4,6 +4,7 @@
     home: 'pages/home.html',
     about: 'pages/about.html',
     schedule: 'pages/schedule.html',
+    images: 'pages/images.html',
     contact: 'pages/contact.html'
   };
 
