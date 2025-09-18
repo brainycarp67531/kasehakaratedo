@@ -13,3 +13,8 @@
 
 
 2025-08-25: Hemsidan uppdaterad med de senaste ändringarna. 
+
+
+
+Start the webserver
+python3 -m http.server 5500
