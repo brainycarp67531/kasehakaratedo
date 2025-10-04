@@ -5,6 +5,7 @@
     about: 'pages/about.html',
     schedule: 'pages/schedule.html',
     images: 'pages/images.html',
+    member: 'pages/member.html',
     contact: 'pages/contact.html'
   };
 
