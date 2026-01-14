@@ -20,6 +20,22 @@
     });
   }
 
+  async function loadIncludes(){
+    const includes = contentEl.querySelectorAll('[data-include]');
+    for(const el of includes){
+      try{
+        const src = el.getAttribute('data-include');
+        const res = await fetch(src, { cache: 'no-store' });
+        if(res.ok){
+          const html = await res.text();
+          el.innerHTML = html;
+        }
+      }catch(err){
+        console.error('Failed to load include:', err);
+      }
+    }
+  }
+
   async function loadRoute(route){
     if(!routes[route]){ route = 'home'; }
     setActive(route);
@@ -28,6 +44,8 @@
       if(!res.ok) throw new Error(res.status + ' ' + res.statusText);
       const html = await res.text();
       contentEl.innerHTML = html;
+      // Load any includes
+      await loadIncludes();
       // focus first heading for accessibility
       const h1 = contentEl.querySelector('h1');
       if(h1){ h1.setAttribute('tabindex','-1'); h1.focus(); }
