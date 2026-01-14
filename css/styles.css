@@ -13,9 +13,8 @@
 html{scroll-behavior:smooth}
 body{
   margin:0;
-  min-height:100dvh; /* sticky footer */
-  display:flex;
-  flex-direction:column;
+  padding-top:60px; /* space for fixed header */
+  padding-bottom:50px; /* space for fixed footer */
   font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji", "Segoe UI Emoji";
   color:var(--ink);
   background:var(--bg);
@@ -23,7 +22,7 @@ body{
 
 /* ===== Layout ===== */
 .container{ max-width:1100px; margin-inline:auto; padding:0 1rem; }
-header.site-header{ background:var(--surface); border-bottom:1px solid #e6e8ee; }
+header.site-header{ background:var(--surface); border-bottom:1px solid #e6e8ee; position:fixed; top:0; left:0; right:0; z-index:100; }
 .header-inner{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:0.75rem 0; }
 .brand{ display:flex; align-items:center; gap:.75rem; text-decoration:none; }
 .brand-logo{ width:36px;height:36px; display:inline-block; }
@@ -48,10 +47,9 @@ nav.primary-nav a{ display:inline-block; padding:.5rem .75rem; border-radius:.5r
 nav.primary-nav a:hover{ background:#eef3ff; color:#0b3d91 }
 nav.primary-nav a[aria-current="page"], nav.primary-nav a.active{ background:var(--brand); color:#fff; }
 
-main{ flex:1; }
 main .container{ padding:2rem 1rem; }
 
-footer.site-footer{ background:var(--surface); border-top:1px solid #e6e8ee; margin-top:auto; }
+footer.site-footer{ background:var(--surface); border-top:1px solid #e6e8ee; position:fixed; bottom:0; left:0; right:0; z-index:100; }
 .footer-inner{ padding:1rem 0; display:flex; justify-content:space-between; align-items:center; gap:1rem; color:var(--muted); font-size:.95rem; }
 
 /* ===== Utilities ===== */
