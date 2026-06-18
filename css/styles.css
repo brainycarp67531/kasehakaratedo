@@ -59,8 +59,55 @@ footer.site-footer{ background:var(--surface); border-top:1px solid #e6e8ee; pos
 .cards{ display:grid; grid-template-columns:repeat(12,1fr); gap:1rem; }
 .card{ grid-column:span 4; background:#fff; border:1px solid #ebedf3; border-radius:.75rem; padding:1rem; box-shadow:0 1px 2px rgba(0,0,0,.04) }
 .card h3{ margin-top:.25rem }
+.card-half { grid-column: span 6; }
+.hero-img { max-width: 33%; height: auto; border-radius: 8px; box-shadow: 10px 10px 15px rgba(0,0,0,1); }
 @media (max-width: 900px){ .card{ grid-column:span 6 } }
-@media (max-width: 600px){ .header-inner{ flex-wrap:wrap } nav.primary-nav ul{ flex-wrap:wrap } .card{ grid-column:span 12 } }
+@media (max-width: 600px){ .card{ grid-column:span 12 } .card-half{ grid-column:span 12 } }
+
+/* ===== Hamburger / Mobile nav ===== */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 1.5rem;
+  height: 1.125rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+.hamburger-bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.nav-toggle[aria-expanded="true"] .hamburger-bar:first-child { transform: translateY(8px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"] .hamburger-bar:nth-child(2) { opacity: 0; }
+.nav-toggle[aria-expanded="true"] .hamburger-bar:last-child  { transform: translateY(-8px) rotate(-45deg); }
+
+@media (max-width: 768px) {
+  .nav-toggle { display: flex; }
+  .primary-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid #e6e8ee;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    z-index: 99;
+  }
+  .primary-nav.open { display: block; }
+  nav.primary-nav ul { flex-direction: column; gap: 0; padding: 0.5rem 1rem 0.75rem; }
+  nav.primary-nav a { display: block; padding: 0.75rem 0.5rem; border-radius: 0; border-bottom: 1px solid #ebedf3; }
+  nav.primary-nav li:last-child a { border-bottom: none; }
+  .hero-img { max-width: 65%; }
+}
 
 
 /* ===== Welcome page ===== */

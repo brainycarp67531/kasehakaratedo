@@ -66,9 +66,32 @@
     loadRoute(route);
   }
 
-  // Intercept nav clicks (optional — hash will trigger anyway)
-  navLinks.forEach(a => a.addEventListener('click', e => {
-    // Allow default (hash change) to occur; nothing else needed
+  // Hamburger menu
+  const navToggle = document.querySelector('.nav-toggle');
+  const primaryNav = document.querySelector('#primary-nav');
+
+  function closeNav(){
+    primaryNav.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.setAttribute('aria-label', 'Öppna meny');
+  }
+
+  if(navToggle){
+    navToggle.addEventListener('click', () => {
+      const isOpen = primaryNav.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+      navToggle.setAttribute('aria-label', isOpen ? 'Stäng meny' : 'Öppna meny');
+    });
+    document.addEventListener('click', e => {
+      if(primaryNav.classList.contains('open') && !navToggle.contains(e.target) && !primaryNav.contains(e.target)){
+        closeNav();
+      }
+    });
+  }
+
+  // Close mobile nav on link click; allow hash change to proceed
+  navLinks.forEach(a => a.addEventListener('click', () => {
+    if(navToggle) closeNav();
   }));
 
   window.addEventListener('hashchange', handleHash);
