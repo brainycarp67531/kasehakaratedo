@@ -36,6 +36,14 @@
     }
   }
 
+  function executeScripts(container){
+    container.querySelectorAll('script').forEach(old => {
+      const s = document.createElement('script');
+      s.textContent = old.textContent;
+      old.replaceWith(s);
+    });
+  }
+
   async function loadRoute(route){
     if(!routes[route]){ route = 'home'; }
     setActive(route);
@@ -44,9 +52,8 @@
       if(!res.ok) throw new Error(res.status + ' ' + res.statusText);
       const html = await res.text();
       contentEl.innerHTML = html;
-      // Load any includes
+      executeScripts(contentEl);
       await loadIncludes();
-      // focus first heading for accessibility
       const h1 = contentEl.querySelector('h1');
       if(h1){ h1.setAttribute('tabindex','-1'); h1.focus(); }
     }catch(err){

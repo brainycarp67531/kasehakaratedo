@@ -1,43 +1,310 @@
-<div style="text-align: center;">
-  <h1>Bildgalleri</h1>
-  <p class="lead">En samling bilder från vår träning och våra evenemang.</p>
-</div>
+<style>
+  .photo-gallery-section {
+    --pg-ink: #1a1a1a;
+    --pg-accent: #a3273c;
+    --pg-surface: #ffffff;
+    font-family: inherit;
+  }
 
-<div class="cards" style="margin-top: 2rem;">
+  .photo-gallery-intro h1 {
+    letter-spacing: 0.01em;
+  }
+
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.75rem;
+    margin-top: 2rem;
+  }
+
+  .photo-card {
+    position: relative;
+    margin: 0;
+    border-radius: 14px;
+    overflow: hidden;
+    cursor: pointer;
+    background: #111;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .photo-card:hover,
+  .photo-card:focus-visible {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.2);
+  }
+
+  .photo-card:focus-visible {
+    outline: 3px solid var(--pg-accent);
+    outline-offset: 2px;
+  }
+
+  .photo-card img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .photo-card:hover img {
+    transform: scale(1.07);
+  }
+
+  .photo-card figcaption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 1rem 1.1rem 0.9rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.88), rgba(0, 0, 0, 0));
+    color: #fff;
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+
+  .photo-card .caption-mark {
+    display: block;
+    width: 26px;
+    height: 3px;
+    margin-bottom: 0.45rem;
+    background: var(--pg-accent);
+    transform: scaleX(0.4);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+
+  .photo-card:hover .caption-mark,
+  .photo-card:focus-visible .caption-mark {
+    transform: scaleX(1);
+  }
+
+  /* Lightbox */
+  .lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(8, 8, 8, 0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease;
+  }
+
+  .lightbox-overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .lightbox-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 90vw;
+  }
+
+  .lightbox-content img {
+    max-width: 90vw;
+    max-height: 75vh;
+    border-radius: 8px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  }
+
+  .lightbox-caption {
+    color: #f4f4f4;
+    margin-top: 1.1rem;
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .lightbox-close,
+  .lightbox-nav {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.08);
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    font-size: 1.5rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+  }
+
+  .lightbox-close:hover,
+  .lightbox-nav:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .lightbox-close {
+    top: 1.25rem;
+    right: 1.25rem;
+  }
+
+  .lightbox-prev {
+    left: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .lightbox-next {
+    right: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  @media (max-width: 600px) {
+    .photo-card img {
+      height: 220px;
+    }
+    .lightbox-prev,
+    .lightbox-next {
+      width: 38px;
+      height: 38px;
+      font-size: 1.2rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .photo-card,
+    .photo-card img,
+    .caption-mark,
+    .lightbox-overlay {
+      transition: none !important;
+    }
+  }
+</style>
+
+<div class="photo-gallery-section">
+
+  <div class="photo-gallery-intro" style="text-align: center;">
+    <h1>Bildgalleri</h1>
+    <p class="lead">En samling bilder från vår träning och våra evenemang.</p>
+  </div>
 
   <!--
   ==================================================================
-  BILDMALL: För att lägga till en ny bild, kopiera <article>-blocket nedan.
+  BILDMALL: För att lägga till en ny bild, kopiera <figure>-blocket nedan.
 
   - Byt ut `src` i <img>-taggen till sökvägen för din bildfil.
-  - Byt ut `alt` till en kort beskrivning av bilden.
-  - Uppdatera texten inuti <p>-taggen för bildtexten.
+  - Byt ut `alt` till en kort, beskrivande text (bra för tillgänglighet).
+  - Uppdatera texten inuti <figcaption> till bildtexten.
   ==================================================================
   -->
-  <article class="card" style="grid-column: span 4;">
-    <img src="assets/makedonien2024.jpeg" alt="En platshållarbild" style="width: 100%; height: auto; display: block;">
-    <p style="padding: 1rem; text-align: center; margin-bottom: 0;">Makedonien 2024</p>
-  </article>
-  <article class="card" style="grid-column: span 4;">
-    <img src="assets/serbien2019.jpeg" alt="En platshållarbild" style="width: 100%; height: auto; display: block;">
-    <p style="padding: 1rem; text-align: center; margin-bottom: 0;">Serbien 2019</p>
-  </article>
-  <article class="card" style="grid-column: span 4;">
-    <img src="assets/jonnyLena.jpg" alt="En platshållarbild" style="width: 100%; height: auto; display: block;">
-    <p style="padding: 1rem; text-align: center; margin-bottom: 0;">Sensei Jonny och Sempai Lena</p>
-  </article>
-  <article class="card" style="grid-column: span 4;">
-    <img src="assets/JonnyMirce.jpeg" alt="En platshållarbild" style="width: 100%; height: auto; display: block;">
-    <p style="padding: 1rem; text-align: center; margin-bottom: 0;">Sensei Mirce och Sensei Jonny</p>
-  </article>
-  <article class="card" style="grid-column: span 4;">
-    <img src="assets/spring2025.jpeg" alt="En platshållarbild" style="width: 100%; height: auto; display: block;">
-    <p style="padding: 1rem; text-align: center; margin-bottom: 0;">Våren 2025</p>
-  </article>
+  <div class="photo-grid" id="photoGrid">
 
+    <figure class="photo-card" tabindex="0" role="button" aria-label="Förstora bild: Makedonien 2024">
+      <img src="assets/makedonien2024.jpeg" alt="En platshållarbild" loading="lazy">
+      <figcaption><span class="caption-mark"></span>Makedonien 2024</figcaption>
+    </figure>
 
+    <figure class="photo-card" tabindex="0" role="button" aria-label="Förstora bild: Serbien 2019">
+      <img src="assets/serbien2019.jpeg" alt="En platshållarbild" loading="lazy">
+      <figcaption><span class="caption-mark"></span>Serbien 2019</figcaption>
+    </figure>
 
-  <!-- Klistra in fler <article>-block här för att lägga till fler bilder -->
+    <figure class="photo-card" tabindex="0" role="button" aria-label="Förstora bild: Sensei Jonny och Sempai Lena">
+      <img src="assets/jonnyLena.jpg" alt="En platshållarbild" loading="lazy">
+      <figcaption><span class="caption-mark"></span>Sensei Jonny och Sempai Lena</figcaption>
+    </figure>
 
+    <figure class="photo-card" tabindex="0" role="button" aria-label="Förstora bild: Sensei Mirce och Sensei Jonny">
+      <img src="assets/JonnyMirce.jpeg" alt="En platshållarbild" loading="lazy">
+      <figcaption><span class="caption-mark"></span>Sensei Mirce och Sensei Jonny</figcaption>
+    </figure>
 
+    <figure class="photo-card" tabindex="0" role="button" aria-label="Förstora bild: Våren 2025">
+      <img src="assets/spring2025.jpeg" alt="En platshållarbild" loading="lazy">
+      <figcaption><span class="caption-mark"></span>Våren 2025</figcaption>
+    </figure>
+    <!-- new image for spring 2026 -->
+    <figure class="photo-card" tabindex="0" role="button" aria-label="Förstora bild: Sensei Jonny och Sempai Lena">
+      <img src="assets/spring2026.jpeg" alt="En platshållarbild" loading="lazy">
+      <figcaption><span class="caption-mark"></span>Våren 2026</figcaption>
+    </figure>
+
+    <!-- Klistra in fler <figure> block här för att lägga till fler bilder -->
+
+  </div>
 </div>
+
+<div class="lightbox-overlay" id="lightboxOverlay" aria-hidden="true">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Stäng">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Föregående bild">&#8249;</button>
+  <div class="lightbox-content">
+    <img id="lightboxImage" src="" alt="">
+    <p class="lightbox-caption" id="lightboxCaption"></p>
+  </div>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Nästa bild">&#8250;</button>
+</div>
+
+<script>
+  (function () {
+    const cards = Array.from(document.querySelectorAll('#photoGrid .photo-card'));
+    const overlay = document.getElementById('lightboxOverlay');
+    const imgEl = document.getElementById('lightboxImage');
+    const captionEl = document.getElementById('lightboxCaption');
+    const closeBtn = document.getElementById('lightboxClose');
+    const prevBtn = document.getElementById('lightboxPrev');
+    const nextBtn = document.getElementById('lightboxNext');
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+      currentIndex = index;
+      const card = cards[index];
+      const img = card.querySelector('img');
+      imgEl.src = img.src;
+      imgEl.alt = img.alt;
+      captionEl.textContent = card.querySelector('figcaption').textContent.trim();
+      overlay.classList.add('active');
+      overlay.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+    }
+
+    function closeLightbox() {
+      overlay.classList.remove('active');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    function showNext() {
+      openLightbox((currentIndex + 1) % cards.length);
+    }
+
+    function showPrev() {
+      openLightbox((currentIndex - 1 + cards.length) % cards.length);
+    }
+
+    cards.forEach((card, i) => {
+      card.addEventListener('click', () => openLightbox(i));
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openLightbox(i);
+        }
+      });
+    });
+
+    closeBtn.addEventListener('click', closeLightbox);
+    nextBtn.addEventListener('click', showNext);
+    prevBtn.addEventListener('click', showPrev);
+
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!overlay.classList.contains('active')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') showNext();
+      if (e.key === 'ArrowLeft') showPrev();
+    });
+  })();
+</script>
