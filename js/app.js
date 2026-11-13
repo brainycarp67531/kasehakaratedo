@@ -6,6 +6,7 @@
     schedule: 'pages/schedule.html',
     images: 'pages/images.html',
     member: 'pages/member.html',
+    osu: 'pages/osu.html',
     contact: 'pages/contact.html'
   };
 
